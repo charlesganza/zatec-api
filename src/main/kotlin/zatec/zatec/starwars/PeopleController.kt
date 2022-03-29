@@ -13,15 +13,14 @@ import org.springframework.web.bind.annotation.RestController
 class PeopleController @Autowired constructor(val peopleService: PeopleService) {
 
     @RequestMapping(value = ["swapi/people"], method = [RequestMethod.GET])
-    fun getPeople(): String {
+    fun getPeople(): ResponseEntity<ApiResult<Person>> {
         val people = peopleService.getPeople()
 
-        return people
-        /*return if(people == null){
+        return if(people == null){
             ResponseEntity<ApiResult<Person>>(null, null, HttpStatus.NO_CONTENT)
         } else {
             ResponseEntity<ApiResult<Person>>(people, null, HttpStatus.OK)
-        }*/
+        }
     }
 
 }
