@@ -9,3 +9,5 @@ class ZatecApplication
 fun main(args: Array<String>) {
 	SpringApplication.run(ZatecApplication::class.java, *args)
 }
+
+
