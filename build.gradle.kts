@@ -24,12 +24,20 @@ dependencies {
 	//kotlin
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	//coroutines
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.6.0")
+	runtimeOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.6.0")
+
+	//reactive streams
+	implementation("org.reactivestreams:reactive-streams:1.0.3")
 	//h2 database
 	implementation("com.h2database:h2:2.1.210")
 	//json parser Jackson
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.+")
-	//http client OkHttp
-	implementation("com.squareup.okhttp3:okhttp:4.9.3")
+	//http client Retrofit
+	implementation("com.squareup.retrofit2:retrofit:2.9.0")
+	implementation("com.squareup.retrofit2:converter-jackson:2.9.0")
 	//junit
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
