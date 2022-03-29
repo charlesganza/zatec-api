@@ -1,9 +1,6 @@
 package zatec.zatec.search
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,11 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
-import zatec.zatec.chuck.JokeSearchResult
-import zatec.zatec.starwars.ApiResult
+import zatec.zatec.networking.Endpoints
 import zatec.zatec.starwars.CategoryService
 import zatec.zatec.starwars.PeopleService
-import zatec.zatec.starwars.Person
 
 @RestController
 @RequestMapping("/api")
@@ -29,14 +24,14 @@ class SearchController @Autowired constructor(val peopleService: PeopleService, 
         return if(params.isNotEmpty()){
 
             //make two simultaneous requests
-            val searchResult: SearchResult = runBlocking {
+            val searchResult: SearchResult = withContext(Dispatchers.IO) {
                 val people = async {
                     peopleService.searchPeople(params["query"].toString())
                 }
                 val jokes = async {
                     categoryService.searchJokes(params["query"].toString())
                 }
-                SearchResult(people.await(), jokes.await())
+                SearchResult(PeopleResult(link = Endpoints.ENDPOINT_PEOPLE, people.await()), JokesResultResult(link = Endpoints.ENDPOINT_CHUCK_NORRIS, jokes.await()))
             }
 
             //user is trying to search
