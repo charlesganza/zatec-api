@@ -12,24 +12,11 @@ class CategoryService @Autowired constructor() {
     val repositoryService = RepositoryService()
 
     fun getCategories(): List<String>? {
-        val request = repositoryService.getService().getCategories().execute()
-
-        if (!request.isSuccessful) {
-            throw IOException(if (request.errorBody() == null) "Unknown error" else request.errorBody()?.string())
-        }
-
-        return request.body()
+        return repositoryService.getService().getCategories().execute().body()
     }
 
     fun searchJokes(query: String): JokeSearchResult? {
-        val request = repositoryService.getService().searchJokes(query).execute()
-
-        if (!request.isSuccessful) {
-            throw IOException(if (request.errorBody() == null) "Unknown error" else request.errorBody()?.string())
-        }
-
-        return request.body()
-
+        return repositoryService.getService().searchJokes(query).execute().body()
     }
 
 }

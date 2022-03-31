@@ -36,6 +36,7 @@ dependencies {
 	//http client Retrofit
 	implementation("com.squareup.retrofit2:retrofit:2.9.0")
 	implementation("com.squareup.retrofit2:converter-jackson:2.9.0")
+	testImplementation("com.squareup.okhttp3:mockwebserver:4.9.0")
 	//junit
 	testImplementation("org.junit.jupiter:junit-jupiter-api")
 	testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
