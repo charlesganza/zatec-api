@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  # API service
+  app-server:
+    build:
+      context: ./zetac 
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" 
+    restart: always
+    networks: 
+      - backend
+      - frontend
+    image: zetac-api
+
+  # Frontend Service 
+  app-client:
+    build:
+      context: ./zetac-front-end
+      dockerfile: Dockerfile
+    ports:
+      - "9090:80" 
+    restart: always
+    depends_on:
+      - app-server
+    networks:
+      - frontend  
+    image: zetac-front-end
+
+networks:
+  backend:
+  frontend: 
